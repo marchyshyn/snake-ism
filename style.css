@@ -1,0 +1,29 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	height: 100%;
+}
+
+body {
+	margin: 0;
+	height: 100%;
+}
+div {
+	background: #eee;
+	height: 100%;
+}
+
+.snake {
+	background: black;
+}
+
+.snakeOut {
+	background: #eee;
+}
+
+.food {
+	background: red;
+}
