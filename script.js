@@ -1,8 +1,9 @@
-window.onload = function(){
+
 	var canvas = $('#canvas')[0];
 	var ctx = canvas.getContext('2d');
 	var width = $('#canvas').width();
 	var height = $('#canvas').height();
+	var $score = $('.score');
 
 	var cellSize = 10,
 	direction,
@@ -10,32 +11,54 @@ window.onload = function(){
 	foodY,
 	score,
 	length = 5,
+	upLevel = 1,
+	speed = 100,
 	snakeArray;
 
 	function init() {
 		direction = 'right';
+		score = 0;
 		createSnake();
 		createFood();
-		loop = setInterval(paintSnake, 100);
-
 	}
-	init();
+
+	function setLoop() {
+		loop = setInterval(paintSnake, speed);
+	}
+
+	function boom() {
+		clearInterval(loop);
+		snakeArray = [];
+		$score.html('0');
+		init();
+		setLoop();
+	}
+
+	function levelUp() {
+		// var sc = parseInt($score.text());
+		// if(sc > upLevel){
+		// 	setInterval(paintSnake, 300);
+		// 	upLevel+=5;
+		// }
+	}
 
 	function eat() {
-		length = 1;
+		plus = 1;
+		score++;
+		$score.html(score);
 		reloadSnake();
 		createFood();
+		levelUp();
 	}
 
 	function reloadSnake() {
 		var lastDot = snakeArray.pop();
-		for (var i = length; i>=0 ; i--) {
+		for (var i = plus; i>=0 ; i--) {
 			snakeArray.push({x:lastDot.x, y:lastDot.y});
 		};
 	}
 
 	function createSnake() {
-		//length = 5;
 		snakeArray = [];
 		for (var i = length; i>=0 ; i--) {
 			snakeArray.push({x:i, y:0});
@@ -80,10 +103,19 @@ window.onload = function(){
 
 		if(tail.x == foodX && tail.y ==foodY){	
 			eat();
-			console.log(true);
 		}
 
 		snakeArray.unshift(tail);
+
+		for (var i = 1; i < snakeArray.length; i++) {
+			if (snakeArray[i].x == tail.x && snakeArray[i].y == tail.y) {
+				clearInterval(loop);
+			};
+		};
+
+		if(tail.x == width / cellSize || tail.y == height / cellSize || tail.y < 0 || tail.x < 0) {
+			boom();
+		}
 
 		for(var i = 0; i < snakeArray.length; i++){
 			var c = snakeArray[i];
@@ -91,6 +123,7 @@ window.onload = function(){
 		}
 		paintFood();
 	}
+
 
 	function paintCanvas(x, y) {
 
@@ -102,10 +135,10 @@ window.onload = function(){
 
 	$(document).keydown(function(e){
 		var key = e.which;
-		if(key == '37') direction = 'left';
-		if(key == '38') direction = 'up';
-		if(key == '39') direction = 'right';
-		if(key == '40') direction = 'down';
+		if(key == '37' && direction != 'right') direction = 'left';
+		if(key == '38' && direction != 'down') direction = 'up';
+		if(key == '39' && direction != 'left') direction = 'right';
+		if(key == '40' && direction != 'up') direction = 'down';
 	})
 
 	// function check(x, y, array) {
@@ -116,4 +149,9 @@ window.onload = function(){
 	// 		return false;
 	// 	};
 	// }
-}
+
+
+$(window).load(function() {
+	init();
+	setLoop();
+})

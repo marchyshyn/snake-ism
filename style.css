@@ -27,3 +27,10 @@ div {
 .food {
 	background: red;
 }
+
+.scoreCount {
+	display: inline-block;
+	background: #333;
+	color: tomato;
+	padding: 5px;
+}
