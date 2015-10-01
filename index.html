@@ -6,10 +6,21 @@
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<canvas id='canvas' width='500' height='500'></canvas>
-	<button onclick="clearInterval(loop);">STOP</button>
-	<button onclick="setLoop();">PLAY</button>
-	<p class="scoreCount">SCORE: <span class="score">0</span></p>
+	<div class="wrapper">
+		<canvas id='canvas' width='400' height='450'></canvas>
+		<div class="nav-wrapper">
+			<div class="game-info">
+				<p class="info">SCORE: <span class="score">0</span></p>
+				<p class="info">Level: <span class="level">1</span></p>
+			</div>
+			<button class="button" onclick="clearInterval(loop);">STOP</button>
+			<button class="button" onclick="setLoop(speed);">PLAY</button>
+			<button class="button" onclick="restart();">Restart</button>
+			<img src="img/snake-skin2.png" alt="" class="snake-skin">
+			<img src="img/apple.png" alt="" class="snake-skin">
+			<img src="img/grass2.png" alt="" class="snake-skin">
+		</div>
+	</div>
 	<script src="jquery-2.1.4.min.js"></script>
 	<script src="script.js"></script>
 </body>

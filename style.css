@@ -11,26 +11,38 @@ body {
 	margin: 0;
 	height: 100%;
 }
-div {
-	background: #eee;
-	height: 100%;
-}
 
-.snake {
-	background: black;
-}
-
-.snakeOut {
-	background: #eee;
-}
-
-.food {
-	background: red;
-}
-
-.scoreCount {
+.info {
 	display: inline-block;
 	background: #333;
 	color: tomato;
 	padding: 5px;
+	text-transform: uppercase;
+}
+
+.wrapper {
+	width: 450px;
+	margin: 0 auto;
+	background: #333;
+	height: 800px;
+	text-align: center;
+	padding-top: 20px;
+	border-radius: 5px;
+}
+
+.game-info {
+	margin-bottom: 10px;
+}	
+
+.button {
+	border: none;
+	background: tomato;
+	color: #fff;
+	padding: 5px;
+	font-size: 16px;
+	text-transform: uppercase;
+}
+
+img {
+	display: none;
 }
